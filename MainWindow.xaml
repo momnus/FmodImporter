@@ -1,0 +1,102 @@
+﻿<Window x:Class="FMODAudioImporter.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FMODAudioImporter"
+        mc:Ignorable="d"
+        Title="FMOD Audio Importer" Height="280" Width="330"
+        Icon="Resources\fmod_audio_importer_icon.ico"
+        ResizeMode="CanResizeWithGrip" MinWidth="330" MinHeight="280"
+        Drop="Window_Drop"
+        Loaded="Window_Loaded">
+    <Grid>
+        <TabControl Margin="0,0,0,25" x:Name="tabControlMain">
+            <TabItem Header="Importer">
+                <Grid>
+                    <TextBlock
+                        Margin="10,68,10,46"  TextAlignment="Center"
+                        FontFamily="Century Gothic"
+                        FontSize="20"
+                        FontStretch="UltraExpanded"
+                        TextWrapping="Wrap"
+                        FontWeight="Light"
+                    >
+                        <Run Text="Drag "/><Run Text="&amp; Drop a folder containing audio files"/><Run Text=" 🎵"/><LineBreak/><Run/><Run Text=" "/>
+                    </TextBlock>
+
+                    <Rectangle Height="180" Width="310" Fill="#f7f7f7" Opacity=".5"
+                               x:Name="FileDropArea"  AllowDrop="True"
+                    />
+
+                    <Button x:Name="ConnectButton" Content="Connect" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,10,10" Width="100" Click="Connect_Click"/>
+
+                </Grid>
+            </TabItem>
+
+            <TabItem Header="Settings">
+                <Grid Margin="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="10"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Content="IP" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                    <TextBox x:Name="textBoxIp" Grid.Row="1" Grid.Column="1" TextWrapping="Wrap" Text="{Binding AppSettings.IP, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center"/>
+
+                    <Label Content="Port" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                    <TextBox x:Name="textBoxPort" Grid.Row="2" Grid.Column="1" TextWrapping="Wrap" Text="{Binding AppSettings.Port, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center"/>
+
+                    <Label Content="Suffix settings" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" FontSize="13" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+                    <Label Content="Multi Instrument" Grid.Row="5" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="11"/>
+                    <TextBox x:Name="textBoxMulti" Grid.Row="5" Grid.Column="1" TextWrapping="Wrap" Text="{Binding AppSettings.MultiSuffix, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center"/>
+
+                    <Label Content="Scatterer Instrument" Grid.Row="6" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="11"/>
+                    <TextBox x:Name="textBoxScatterer" Grid.Row="6" Grid.Column="1" TextWrapping="Wrap" Text="{Binding AppSettings.ScattererSuffix, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center"/>
+
+                    <Label Content="Spatializer" Grid.Row="7" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="11"/>
+                    <TextBox x:Name="textBoxSpatializer" Grid.Row="7" Grid.Column="1" TextWrapping="Wrap" Text="{Binding AppSettings.SpatializerSuffix, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center"/>
+
+                    <TextBlock Grid.Row="9" Grid.Column="3" Text="Made by" FontSize="12.5" TextAlignment="Center" HorizontalAlignment="Center"/>
+                    <TextBlock Grid.Row="10" Grid.Column="3" HorizontalAlignment="Center">
+                        <Hyperlink FontSize="12.5" NavigateUri="https://alessandrofama.com/" RequestNavigate="Hyperlink_RequestNavigate">
+                            <Run Text="Alessandro Famà"/>
+                        </Hyperlink>
+                    </TextBlock>
+                     <TextBlock Grid.Row="4" Grid.Column="3" Grid.RowSpan="4" TextWrapping="Wrap" VerticalAlignment="Top" HorizontalAlignment="Left">
+                         <Run Text="Examples"/>
+                         <Run Text=":"/><LineBreak/>
+                         <Run Text="file_z_m_1.wav"/><LineBreak/>
+                         <Run Text="file_z_m_2.wav"/><LineBreak/>
+                         <Run Text="single.wav"/><LineBreak/>
+                         <Run Text="scatter_c_1.wav"/>
+                     </TextBlock>
+                </Grid>
+            </TabItem>
+        </TabControl>
+
+        <StatusBar VerticalAlignment="Bottom" Height="25">
+            <StatusBarItem>
+                <TextBlock x:Name="StatusTextBlock" Text="{Binding StatusText}"/>
+            </StatusBarItem>
+        </StatusBar>
+
+    </Grid>
+</Window>
